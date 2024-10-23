@@ -15,6 +15,28 @@ namespace DataJob.Server.Ex
                 j.StoreDurably(true);
             }
             );
+
+            if (cronStr != null)
+            {
+                quartz.AddTrigger(t => t
+                      .WithIdentity(id)
+                      .ForJob(jobKey)
+                      .StartNow()
+                      .WithCronSchedule(cronStr)//持续工作
+                      .WithDescription(desc)
+                  );
+            }
+            else
+            {
+                quartz.AddTrigger(t => t
+                .WithIdentity(id)
+                .ForJob(jobKey)
+                .StartNow()
+                .WithSimpleSchedule(x => x.WithInterval(TimeSpan.FromSeconds(intervalSecond))
+                .RepeatForever())//持续工作
+                .WithDescription(desc)
+                );
+            }
         }
     }
 }
