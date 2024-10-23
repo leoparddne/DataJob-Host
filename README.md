@@ -4,20 +4,99 @@
 定时服务，定时调用配置的接口
 
 #### 软件架构
-软件架构说明
+基于.net5
 
-
-#### 安装教程
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
 
 #### 使用说明
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+1.  在appsettings.json中配置需要定时调用的接口
+2.  接口ip相同的可以维护在同一个配置中公用一个BaseUrl
+3.  支持cron表达式，如果维护了cron表达式则优先使用cron表达式，否则使用IntervalSecond配置的定时间隔，默认时间间隔为10秒
+
+
+#### 配置文件参考
+```
+{
+  "Jobs": [
+    //{
+    //  //"BaseUrl": "http://192.168.2.49:7000",
+    //  "BaseUrl": "http://192.168.2.84:7024",
+    //  "Jobs": [
+    //    {
+    //      "Url": "api/Andon/BaseJob/AutoSendMessageJob",
+    //      "IntervalSecond": 10,
+    //      "Parameter": "{\"Count\":5}"
+    //    },
+    //    {
+    //      "Url": "api/Andon/BaseJob/CheckExceptionStatusHandleJob",
+    //      "IntervalSecond": 60
+    //    },
+    //    {
+    //      "Url": "api/Andon/BaseJob/AutoSendSubscribeMsg",
+    //      "IntervalSecond": 10,
+    //      "Parameter": "{\"Count\":5}"
+    //    }
+    //  ]
+    //},
+    //{
+    //  //"BaseUrl": "http://192.168.2.49:7000",
+    //  "BaseUrl": "http://192.168.2.84:7024",
+    //  "Jobs": [
+    //    {
+    //      "Url": "api/Andon/BaseJob/AutoSendMessageJob",
+    //      "IntervalSecond": 10,
+    //      "Cron": "0 * * * * ?"
+    //    }
+    //  ]
+    //},
+    //{
+    //  "BaseUrl": "http://192.168.2.84:7000",
+    //  "Jobs": [
+    //    {
+    //      "Url": "api/Platform/Sync/SyncUser",
+    //      "IntervalSecond": 10,
+    //      "Cron": "0 * * * * ?"
+    //    },
+    //    {
+    //      "Url": "api/Platform/Sync/SyncVendor",
+    //      "IntervalSecond": 10,
+    //      "Cron": "0 * * * * ?"
+    //    }
+    //  ]
+    //},
+    {
+      //"BaseUrl": "http://127.0.0.1:7013",
+      "BaseUrl": "http://192.168.2.171:7014",
+      "Jobs": [
+        {
+          "Url": "api/SRM/Sync/SyncPO",
+          "IntervalSecond": 180,
+          "TimeOutSecond": 60,
+          "Parameter": "{ }"
+        }
+        //,
+        //{
+        //  "Url": "api/SRM/Sync/SyncVendorUser",
+        //  "IntervalSecond": 180,
+        //  "Parameter": "{ }"
+        //},
+        //{
+        //  "Url": "api/Platform/Sync/SyncUser",
+        //  "IntervalSecond": 180,
+        //  "TimeOutSecond": 120
+        //"Parameter": "{ }"
+        //}
+        //,
+        //{
+        //  "Url": "api/Platform/Sync/SyncVendor",
+        //  "IntervalSecond": 180,
+        //  "Parameter": "{ }"
+        //}
+      ]
+    }
+  ]
+}
+```
 
 #### 参与贡献
 
@@ -25,13 +104,3 @@
 2.  新建 Feat_xxx 分支
 3.  提交代码
 4.  新建 Pull Request
-
-
-#### 特技
-
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)

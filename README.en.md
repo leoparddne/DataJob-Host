@@ -1,36 +1,107 @@
-# DataJob.Host
+# DataJob. Host
 
-#### Description
-定时服务，定时调用配置的接口
+####Introduction
+Timed service, timed calling of configured interfaces
 
-#### Software Architecture
-Software architecture description
-
-#### Installation
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### Instructions
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### Contribution
-
-1.  Fork the repository
-2.  Create Feat_xxx branch
-3.  Commit your code
-4.  Create Pull Request
+####Software Architecture
+Based on. net5
 
 
-#### Gitee Feature
+####Instructions for use
 
-1.  You can use Readme\_XXX.md to support different languages, such as Readme\_en.md, Readme\_zh.md
-2.  Gitee blog [blog.gitee.com](https://blog.gitee.com)
-3.  Explore open source project [https://gitee.com/explore](https://gitee.com/explore)
-4.  The most valuable open source project [GVP](https://gitee.com/gvp)
-5.  The manual of Gitee [https://gitee.com/help](https://gitee.com/help)
-6.  The most popular members  [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+1. Configure the interfaces that need to be called periodically in appsettings. json
+2. Interfaces with the same IP address can maintain a common BaseURL in the same configuration
+3. Supports cron expressions. If cron expressions are maintained, they will be used first. Otherwise, the timed interval configured by IntervalSecond will be used, with a default time interval of 10 seconds
+
+
+####Configuration file reference
+```
+{
+  "Jobs": [
+    //{
+    //  //"BaseUrl": "http://192.168.2.49:7000",
+    //  "BaseUrl": "http://192.168.2.84:7024",
+    //  "Jobs": [
+    //    {
+    //      "Url": "api/Andon/BaseJob/AutoSendMessageJob",
+    //      "IntervalSecond": 10,
+    //      "Parameter": "{\"Count\":5}"
+    //    },
+    //    {
+    //      "Url": "api/Andon/BaseJob/CheckExceptionStatusHandleJob",
+    //      "IntervalSecond": 60
+    //    },
+    //    {
+    //      "Url": "api/Andon/BaseJob/AutoSendSubscribeMsg",
+    //      "IntervalSecond": 10,
+    //      "Parameter": "{\"Count\":5}"
+    //    }
+    //  ]
+    //},
+    //{
+    //  //"BaseUrl": "http://192.168.2.49:7000",
+    //  "BaseUrl": "http://192.168.2.84:7024",
+    //  "Jobs": [
+    //    {
+    //      "Url": "api/Andon/BaseJob/AutoSendMessageJob",
+    //      "IntervalSecond": 10,
+    //      "Cron": "0 * * * * ?"
+    //    }
+    //  ]
+    //},
+    //{
+    //  "BaseUrl": "http://192.168.2.84:7000",
+    //  "Jobs": [
+    //    {
+    //      "Url": "api/Platform/Sync/SyncUser",
+    //      "IntervalSecond": 10,
+    //      "Cron": "0 * * * * ?"
+    //    },
+    //    {
+    //      "Url": "api/Platform/Sync/SyncVendor",
+    //      "IntervalSecond": 10,
+    //      "Cron": "0 * * * * ?"
+    //    }
+    //  ]
+    //},
+    {
+      //"BaseUrl": "http://127.0.0.1:7013",
+      "BaseUrl": "http://192.168.2.171:7014",
+      "Jobs": [
+        {
+          "Url": "api/SRM/Sync/SyncPO",
+          "IntervalSecond": 180,
+          "TimeOutSecond": 60,
+          "Parameter": "{ }"
+        }
+        //,
+        //{
+        //  "Url": "api/SRM/Sync/SyncVendorUser",
+        //  "IntervalSecond": 180,
+        //  "Parameter": "{ }"
+        //},
+        //{
+        //  "Url": "api/Platform/Sync/SyncUser",
+        //  "IntervalSecond": 180,
+        //  "TimeOutSecond": 120
+        //"Parameter": "{ }"
+        //}
+        //,
+        //{
+        //  "Url": "api/Platform/Sync/SyncVendor",
+        //  "IntervalSecond": 180,
+        //  "Parameter": "{ }"
+        //}
+      ]
+    }
+  ]
+}
+```
+
+
+####Participate and contribute
+
+1. Fork's own warehouse
+2. Create a new Feat_xxx branch
+3. Submit code
+4. Create a new Pull Request
